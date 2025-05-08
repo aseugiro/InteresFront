@@ -103,5 +103,7 @@
       }
     }
   },
-  "defaultProject": "interes-historial"
+  "cli": {
+    "analytics": false
+  }
 }
