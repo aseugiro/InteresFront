@@ -1,0 +1,54 @@
+<div class="center">
+    <section id="content">
+        <h1 class="subheader">Ingrese los datos</h1>
+        <form class="mid-form" #operacionForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label  for="montoInicial">Monto Inicial</label>
+                <input type="number" min="0.01" name="montoInicial" #montoInicial="ngModel" [(ngModel)]="calculo.montoInicial" required  />
+                <br/>
+                <small *ngIf="!montoInicial.valid && montoInicial.touched">
+                    El monto inicial no es válido
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="tasaInteres">Tasa interes</label>
+                <input type="number" min="0.01" name="tasaInteres" #tasaInteres="ngModel" [(ngModel)]="calculo.tasaInteres" required /> %
+                <br/>
+                <small *ngIf="!tasaInteres.valid && tasaInteres.touched">
+                    La tasa de interes no es válido
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="anios">Años</label>
+                <input type="number" min="1" max="50" name="anios" #anios="ngModel" [(ngModel)]="calculo.anios" required pattern="-?[0-9]+" />
+                <br/>
+                <small *ngIf="!anios.valid && anios.touched">
+                    Los años no son válidos
+                </small>
+            </div>
+            <input type="submit" value="Calcular"  class="btn btn-success center" [disabled]="operacionForm.invalid" />
+
+          
+        </form>
+    </section>
+    <section id="graficar" >
+        <div  *ngIf="resultado">
+         
+        <ngx-charts-line-chart
+        [view]="view"
+      
+        [results]="chartData"
+       
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [customColors]="ChartcustomColors">
+        </ngx-charts-line-chart>
+    </div>
+    </section>
+</div>
